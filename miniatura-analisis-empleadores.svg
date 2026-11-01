@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" role="img" aria-labelledby="title">
+  <title>Evolución de empleadores activos en Entre Ríos</title>
+  <rect width="800" height="290" fill="#eff6ff"/>
+  <path d="M92 80H708M92 135H708M92 190H708" stroke="#cbd5e1" stroke-width="2"/>
+  <path d="M115 91 L310 76 L505 113 L690 160" fill="none" stroke="#1e3a8a" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="115" cy="91" r="13" fill="#047857"/><circle cx="310" cy="76" r="15" fill="#047857"/><circle cx="505" cy="113" r="13" fill="#1e3a8a"/><circle cx="690" cy="160" r="15" fill="#b91c1c"/>
+  <text x="32" y="40" fill="#172033" font-family="Arial,sans-serif" font-size="24" font-weight="700">EL ENTRAMADO EMPRESARIAL</text>
+  <text x="32" y="250" fill="#64748b" font-family="Arial,sans-serif" font-size="17">Pico y contracción de empleadores activos</text>
+</svg>

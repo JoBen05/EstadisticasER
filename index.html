@@ -24,6 +24,8 @@
     .section-heading { display:flex; align-items:baseline; justify-content:space-between; gap:20px; margin:0 0 15px; }
     h2 { margin:0; color:var(--navy); font-size:1.2rem; }
     .count { color:var(--muted); font-size:.82rem; }
+    .visit-counter { margin:0 0 18px; padding:10px 13px; border:1px solid var(--line); border-radius:10px; color:var(--muted); background:#fff; font-size:.85rem; }
+    .visit-counter strong { color:var(--blue); }
     .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
     .card { display:flex; min-height:330px; flex-direction:column; overflow:hidden; border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 8px 26px rgb(15 23 42 / 6%); }
     .card-image { display:block; width:100%; height:145px; object-fit:cover; background:#eaf1fb; }
@@ -64,9 +66,10 @@
       <p class="lead">Mapas interactivos e informes para explorar indicadores territoriales, económicos y sociales de la provincia.</p>
     </section>
     <section aria-labelledby="resources-title">
+      <div class="visit-counter">Visitas a la portada: <strong id="visit-count">cargando…</strong></div>
       <div class="section-heading">
         <h2 id="resources-title">Mapas e informes</h2>
-        <span class="count">7 recursos publicados</span>
+        <span class="count">8 recursos publicados</span>
       </div>
       <div class="cards">
         <article class="card">
@@ -94,6 +97,15 @@
             <h3>¿Dónde se concentra el empleo privado formal de Entre Ríos?</h3>
             <p>Densidad de empleo privado registrado, empleo público y ratio entre ambos por departamento.</p>
             <a href="mapa-empleadores-entre-rios.html">Abrir mapa →</a>
+          </div>
+        </article>
+        <article class="card">
+          <img class="card-image" src="miniatura-analisis-empleadores.svg" alt="Vista representativa del informe sobre empleadores activos">
+          <div class="card-body">
+            <span class="tag">Informe</span>
+            <h3>El entramado empresarial perdió impulso</h3>
+            <p>Evolución reciente de empleadores activos, impacto en las Mipymes y señales para el trabajo formal.</p>
+            <a href="analisis-empleadores.html">Leer informe →</a>
           </div>
         </article>
         <article class="card">
@@ -149,5 +161,9 @@
       <a href="https://josebentancourt.ar" target="_blank" rel="noopener">Visitar sitio web</a>
     </footer>
   </main>
+  <script data-goatcounter="https://joben.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <script>
+    fetch("https://joben.goatcounter.com/counter/EstadisticasER/.json").then(response => { if (!response.ok) throw new Error("No disponible"); return response.json(); }).then(data => { document.getElementById("visit-count").textContent = data.count || "0"; }).catch(() => { document.getElementById("visit-count").textContent = "No disponible"; });
+  </script>
 </body>
 </html>
