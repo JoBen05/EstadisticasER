@@ -135,11 +135,6 @@
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 12, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
-    const popup = row => `<div class="popup"><h3>${row.departamento}</h3><dl>
-      <dt>Consumo per cápita</dt><dd>${format.format(row.kwh)} kWh/hab</dd>
-      <dt>Consumo total</dt><dd>${format.format(row.consumo)} MWh</dd>
-      <dt>Población (Censo 2022)</dt><dd>${format.format(row.poblacion)}</dd>
-    </dl></div>`;
     const tooltip = row => `<div class="map-tooltip"><h3>${row.departamento}</h3><dl>
       <dt>Per cápita</dt><dd>${format.format(row.kwh)} kWh/hab</dd>
       <dt>Total</dt><dd>${format.format(row.consumo)} MWh</dd>
@@ -160,10 +155,18 @@
         onEachFeature: (feature, layer) => {
           const row = byName.get(normalize(feature.properties.departamento || ""));
           if (!row) return;
-          layer.bindPopup(popup(row));
           layer.bindTooltip(tooltip(row), { sticky: true, direction: "top", opacity: .97 });
-          layer.on({ mouseover: event => event.target.setStyle({ weight: 2.5, fillOpacity: .92 }),
-            mouseout: event => event.target.setStyle(style(feature)) });
+          layer.on({
+            mouseover: event => {
+              event.target.setStyle({ weight: 2.5, fillOpacity: .92 });
+              event.target.openTooltip();
+            },
+            mouseout: event => {
+              event.target.setStyle(style(feature));
+              event.target.closeTooltip();
+            },
+            click: event => event.target.openTooltip()
+          });
         }
       }).addTo(map);
       map.fitBounds(layer.getBounds(), { padding: [12, 12] });
@@ -172,7 +175,11 @@
       status.hidden = false;
       records.forEach(row => L.circleMarker([row.lat, row.lon], {
         radius: 8, color: "#fff", weight: 1, fillColor: colors[row.categoria], fillOpacity: .9
-      }).bindPopup(popup(row)).bindTooltip(tooltip(row), { sticky: true, direction: "top", opacity: .97 }).addTo(map));
+      }).bindTooltip(tooltip(row), { sticky: true, direction: "top", opacity: .97 })
+        .on("mouseover", event => event.target.openTooltip())
+        .on("mouseout", event => event.target.closeTooltip())
+        .on("click", event => event.target.openTooltip())
+        .addTo(map));
     });
   </script>
 </body>
