@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" role="img" aria-labelledby="title">
+  <title>Mapa abstracto de densidad educativa de Entre Ríos</title>
+  <rect width="800" height="290" fill="#eff6ff"/>
+  <path d="M288 27l85 20 57 42 100 8 73 64-35 78-124 22-112-28-76-71 11-81z" fill="#dbeafe" stroke="#1e3a8a" stroke-width="6"/>
+  <path d="M319 43l33 205M393 66l-25 164M475 88l-42 131M560 99l-76 111M260 105l277 57M239 157l301 26M286 207l207 8" fill="none" stroke="#fff" stroke-width="4" opacity=".9"/>
+  <path d="M84 216h125M104 216v-42h27v42M146 216v-76h27v76M188 216v-105h27v105" fill="none" stroke="#107c41" stroke-width="9"/>
+  <circle cx="339" cy="93" r="20" fill="#1e3a8a"/><circle cx="426" cy="133" r="17" fill="#107c41"/><circle cx="499" cy="176" r="14" fill="#d97706"/><circle cx="366" cy="205" r="10" fill="#fde047"/>
+  <text x="32" y="52" fill="#172033" font-family="Arial,sans-serif" font-size="24" font-weight="700">DENSIDAD EDUCATIVA</text>
+  <text x="32" y="82" fill="#64748b" font-family="Arial,sans-serif" font-size="17">Matrícula e infraestructura · Entre Ríos</text>
+</svg>
