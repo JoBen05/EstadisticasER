@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Empleadores registrados por departamento | Entre Ríos</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    :root { --ink:#172033; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; }
+    * { box-sizing:border-box; }
+    body { margin:0; color:var(--ink); background:var(--bg); font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    .wrap { max-width:1280px; margin:auto; padding:28px 20px 20px; }
+    .home-link { display:inline-block; margin-bottom:16px; color:#2563eb; font-size:.88rem; font-weight:750; text-decoration:none; }
+    .home-link:hover, footer a:hover { text-decoration:underline; }
+    header { display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:18px; }
+    .eyebrow { margin:0 0 6px; color:#2563eb; font-size:.78rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    h1 { margin:0; max-width:930px; font-size:clamp(1.7rem,3.2vw,2.7rem); line-height:1.08; }
+    .subtitle { margin:10px 0 0; color:var(--muted); }
+    .date { margin:7px 0 0; color:#475569; font-size:.86rem; font-weight:650; }
+    .brand-logo { width:82px; height:82px; flex:none; border-radius:14px; object-fit:cover; box-shadow:0 6px 18px rgb(15 23 42 / 16%); }
+    .content { display:grid; grid-template-columns:minmax(0,1fr) 310px; gap:18px; }
+    .card { overflow:hidden; border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 8px 26px rgb(15 23 42 / 7%); }
+    #map { width:100%; min-height:650px; }
+    aside { padding:22px; }
+    aside h2 { margin:0 0 17px; font-size:1.05rem; }
+    .average { margin-bottom:25px; padding:15px; border-radius:12px; background:#eff6ff; }
+    .average span { display:block; color:#1d4ed8; font-size:.78rem; font-weight:700; text-transform:uppercase; }
+    .average strong { display:block; margin-top:2px; color:#1e3a8a; font-size:1.55rem; }
+    .legend { display:grid; gap:11px; margin:0; padding:0; list-style:none; }
+    .legend li { display:flex; align-items:center; gap:10px; color:#334155; font-size:.9rem; }
+    .swatch { width:20px; height:20px; border:1px solid rgb(15 23 42 / 12%); border-radius:5px; }
+    .note { margin:24px 0 0; padding-top:17px; border-top:1px solid var(--line); color:var(--muted); font-size:.82rem; }
+    .qr { display:grid; justify-items:center; margin-top:22px; padding-top:18px; border-top:1px solid var(--line); }
+    #qr-code { width:172px; height:172px; overflow:hidden; border-radius:6px; background:#fff; }
+    #qr-code img, #qr-code canvas { display:block; width:172px !important; height:172px !important; max-width:none; }
+    footer { padding:18px 2px 0; color:var(--muted); font-size:.84rem; }
+    footer a { color:#2563eb; font-weight:700; text-decoration:none; }
+    .map-tooltip { min-width:260px; padding:10px 12px; border:0; border-radius:9px; box-shadow:0 5px 18px rgb(15 23 42 / 20%); }
+    .map-tooltip h3 { margin:0 0 7px; color:var(--ink); font-size:.95rem; }
+    .map-tooltip dl { display:grid; grid-template-columns:1fr auto; gap:3px 12px; margin:0; font-size:.78rem; }
+    .map-tooltip dt { color:var(--muted); }
+    .map-tooltip dd { margin:0; color:var(--ink); font-weight:750; text-align:right; }
+    .status { padding:12px 16px; color:#92400e; background:#fffbeb; font-size:.88rem; }
+    @media (max-width:850px) { .content { grid-template-columns:1fr; } #map { min-height:560px; } }
+    @media (max-width:480px) { .brand-logo { width:64px; height:64px; border-radius:11px; } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="home-link" href="index.html">← Volver a Estadísticas Entre Ríos</a>
+    <header>
+      <div>
+        <p class="eyebrow">Entre Ríos · Argentina</p>
+        <h1>¿Dónde están las empresas que mueven Entre Ríos?</h1>
+        <p class="subtitle">Empleadores registrados activos y empleo privado formal por departamento</p>
+        <p class="date">Fecha de creación del informe: 1 de noviembre de 2026</p>
+      </div>
+      <img class="brand-logo" src="Pasted%20Image.png" alt="Logo de JoBen">
+    </header>
+    <div class="content">
+      <section class="card" aria-label="Mapa de empleadores registrados por departamento">
+        <div id="map"></div>
+        <div id="status" class="status" hidden></div>
+      </section>
+      <aside class="card">
+        <h2>Empleadores activos estimados</h2>
+        <div class="average"><span>Total provincial</span><strong>16.330</strong></div>
+        <ul class="legend" aria-label="Categorías de empleadores">
+          <li><i class="swatch" style="background:#1e3a8a"></i>Muy alto · más de 3.000</li>
+          <li><i class="swatch" style="background:#059669"></i>Alto · 1.000–2.999</li>
+          <li><i class="swatch" style="background:#d97706"></i>Medio · 300–999</li>
+          <li><i class="swatch" style="background:#fef08a"></i>Bajo · menos de 300</li>
+        </ul>
+        <p class="note">Estimación territorial basada en el cruce de registros SIPA, OEDE, SRT y fuentes económicas oficiales. Pasá el cursor o tocá un departamento para ver el detalle.</p>
+        <div class="qr"><div id="qr-code" role="img" aria-label="Código QR para visitar josebentancourt.ar"></div></div>
+      </aside>
+    </div>
+    <footer>JoBen | Human-Led Industrial AI · <a href="https://josebentancourt.ar" target="_blank" rel="noopener">josebentancourt.ar</a></footer>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const records = [
+      ["Paraná",-31.73,-60.00,5308,46800,119.4,"Comercio, servicios urbanos, metalmecánica, química"],
+      ["Concordia",-31.39,-58.02,2083,18200,91.2,"Empaque cítrico, aserraderos, empaque de arándanos"],
+      ["Gualeguaychú",-33.01,-58.51,1792,15900,125.4,"Parque Industrial, química, plásticos, autopartes, agro"],
+      ["Uruguay",-32.48,-58.23,1644,14500,124.5,"Frigoríficos avícolas, molinos, carrozados metalmecánicos"],
+      ["Colón",-32.17,-58.23,1042,9200,122.5,"Avicultura de exportación, turismo, molinos arroceros"],
+      ["Federación",-30.98,-57.92,981,8600,108.2,"Aserraderos tecnificados, cítricos, empaque"],
+      ["Gualeguay",-33.15,-59.31,578,5100,88.1,"Frigoríficos vacunos y avícolas, acopio granario"],
+      ["La Paz",-30.74,-59.64,465,4100,54.8,"Ganadería, comercio ribereño, pesca"],
+      ["Villaguay",-31.86,-59.02,442,3900,70.7,"Logística, molienda arrocera, servicios al campo"],
+      ["Diamante",-32.07,-60.32,431,3800,70.2,"Puerto granario, laboratorios veterinarios, lechería"],
+      ["Nogoyá",-32.39,-59.78,385,3400,80.2,"Industria láctea, queserías, acopio cerealero"],
+      ["Victoria",-32.62,-60.15,374,3300,80.9,"Puerto cerealero, agroservicios, turismo"],
+      ["San Salvador",-31.62,-58.50,261,2300,110.5,"Molinos arroceros y talleres metalmecánicos de riego"],
+      ["Tala",-32.18,-59.13,204,1800,58.4,"Avicultura parrillera, tambos"],
+      ["Federal",-30.95,-58.78,147,1300,44.0,"Ganadería de monte, comercio local"],
+      ["Islas del Ibicuy",-33.55,-58.85,125,1100,78.2,"Arenas silíceas, silvicultura"],
+      ["Feliciano",-30.38,-58.75,68,600,36.2,"Ganadería extensiva, comercio comunitario"]
+    ].map(([departamento,lat,lon,empleadores,empleo,porMil,perfil]) =>
+      ({ departamento,lat,lon,empleadores,empleo,porMil,perfil }));
+    const colors = { "Muy Alto":"#1e3a8a", Alto:"#059669", Medio:"#d97706", Bajo:"#fef08a" };
+    const normalize = value => value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+    const byName = new Map(records.map(row => [normalize(row.departamento),row]));
+    const category = value => value > 3000 ? "Muy Alto" : value >= 1000 ? "Alto" : value >= 300 ? "Medio" : "Bajo";
+    const number = value => new Intl.NumberFormat("es-AR").format(value);
+    const tooltip = row => `<div class="map-tooltip"><h3>${row.departamento}</h3><dl><dt>Empleadores activos</dt><dd>${number(row.empleadores)}</dd><dt>Empleo privado formal</dt><dd>${number(row.empleo)} puestos</dd><dt>Empleo por 1.000 hab.</dt><dd>${row.porMil.toFixed(1).replace(".",",")}</dd><dt>Perfil predominante</dt><dd>${row.perfil}</dd></dl></div>`;
+    const map = L.map("map", { scrollWheelZoom:false }).setView([-31.75,-59.2], 7.6);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution:"© OpenStreetMap contributors" }).addTo(map);
+    const style = feature => { const row = byName.get(normalize(feature.properties.departamento || "")); return { color:"#fff", weight:1.4, fillColor:row ? colors[category(row.empleadores)] : "#cbd5e1", fillOpacity:.82 }; };
+    const onEach = (feature, layer) => { const row = byName.get(normalize(feature.properties.departamento || "")); if (!row) return; layer.bindTooltip(tooltip(row), { sticky:true, direction:"top", className:"map-tooltip-shell", opacity:.98 }); layer.on({ mouseover:event => { event.target.setStyle({ weight:3, color:"#172033", fillOpacity:.95 }); event.target.openTooltip(); }, mouseout:event => { geojson.resetStyle(event.target); event.target.closeTooltip(); }, click:event => event.target.openTooltip() }); };
+    let geojson;
+    fetch("https://raw.githubusercontent.com/mgaitan/departamentos_argentina/master/departamentos-entre_rios.json").then(response => { if (!response.ok) throw new Error("No se pudo cargar el mapa territorial."); return response.json(); }).then(data => { geojson = L.geoJSON(data, { style, onEachFeature:onEach }).addTo(map); map.fitBounds(geojson.getBounds(), { padding:[12,12] }); }).catch(error => { const status=document.getElementById("status"); status.hidden=false; status.textContent=error.message; records.forEach(row => { const marker=L.circleMarker([row.lat,row.lon], { radius:8, color:"#fff", weight:1, fillColor:colors[category(row.empleadores)], fillOpacity:.9 }).addTo(map); marker.bindTooltip(tooltip(row), { direction:"top", opacity:.98 }); marker.on("mouseover",() => marker.openTooltip()); marker.on("mouseout",() => marker.closeTooltip()); marker.on("click",() => marker.openTooltip()); }); });
+    new QRCode(document.getElementById("qr-code"), { text:"https://josebentancourt.ar", width:172, height:172, correctLevel:QRCode.CorrectLevel.M });
+  </script>
+</body>
+</html>
