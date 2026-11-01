@@ -31,9 +31,8 @@
     .swatch { width: 20px; height: 20px; border: 1px solid rgb(15 23 42 / 12%); border-radius: 5px; }
     .note { margin: 24px 0 0; padding-top: 17px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
     .qr-card { display: grid; justify-items: center; gap: 8px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
-    #qr-code { width: 120px; height: 120px; border-radius: 6px; }
-    .qr-copy { margin: 0; color: var(--muted); font-size: .8rem; text-align: center; }
-    .qr-copy strong { display: block; margin-bottom: 2px; color: var(--ink); font-size: .88rem; }
+    #qr-code { width: 172px; height: 172px; overflow: hidden; border-radius: 6px; background: #fff; }
+    #qr-code img, #qr-code canvas { display: block; width: 172px !important; height: 172px !important; max-width: none; }
     footer { padding: 18px 2px 0; color: var(--muted); font-size: .84rem; }
     footer a { color: #2563eb; font-weight: 700; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
@@ -86,7 +85,6 @@
         <p class="note">Hacé clic en un departamento para consultar el detalle. Las fronteras se obtienen del mapa GeoJSON de departamentos argentinos.</p>
         <div class="qr-card">
           <div id="qr-code" role="img" aria-label="Código QR para visitar josebentancourt.ar"></div>
-          <p class="qr-copy"><strong>Conocé más</strong>Escaneá el código para visitar josebentancourt.ar</p>
         </div>
       </aside>
     </div>
