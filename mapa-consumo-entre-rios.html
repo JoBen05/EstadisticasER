@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consumo eléctrico por departamento | Entre Ríos</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <style>
+    :root { --ink: #172033; --muted: #64748b; --line: #e2e8f0; --surface: #fff; --bg: #f8fafc; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: var(--ink); background: var(--bg); font: 16px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 28px 20px 20px; }
+    header { margin-bottom: 18px; }
+    .header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+    .brand-logo { width: 82px; height: 82px; flex: 0 0 auto; border-radius: 14px; object-fit: cover; box-shadow: 0 6px 18px rgb(15 23 42 / 16%); }
+    .eyebrow { margin: 0 0 6px; color: #2563eb; font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin: 0; max-width: 900px; font-size: clamp(1.7rem, 3.2vw, 2.7rem); line-height: 1.08; }
+    .subtitle { margin: 10px 0 0; color: var(--muted); }
+    .report-date { margin: 7px 0 0; color: #475569; font-size: .86rem; font-weight: 650; }
+    .content { display: grid; grid-template-columns: minmax(0, 1fr) 310px; gap: 18px; }
+    .card { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); box-shadow: 0 8px 26px rgb(15 23 42 / 7%); }
+    #map { min-height: 650px; width: 100%; }
+    aside { padding: 22px; }
+    aside h2 { margin: 0 0 17px; font-size: 1.05rem; }
+    .average { margin-bottom: 25px; padding: 15px; border-radius: 12px; background: #eff6ff; }
+    .average span { display: block; color: #1d4ed8; font-size: .78rem; font-weight: 700; text-transform: uppercase; }
+    .average strong { display: block; margin-top: 2px; color: #1e3a8a; font-size: 1.55rem; }
+    .legend { display: grid; gap: 11px; margin: 0; padding: 0; list-style: none; }
+    .legend li { display: flex; align-items: center; gap: 10px; color: #334155; font-size: .9rem; }
+    .swatch { width: 20px; height: 20px; border: 1px solid rgb(15 23 42 / 12%); border-radius: 5px; }
+    .note { margin: 24px 0 0; padding-top: 17px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    .qr-card { display: grid; justify-items: center; gap: 8px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+    #qr-code { width: 120px; height: 120px; border-radius: 6px; }
+    .qr-copy { margin: 0; color: var(--muted); font-size: .8rem; text-align: center; }
+    .qr-copy strong { display: block; margin-bottom: 2px; color: var(--ink); font-size: .88rem; }
+    footer { padding: 18px 2px 0; color: var(--muted); font-size: .84rem; }
+    footer a { color: #2563eb; font-weight: 700; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .leaflet-popup-content-wrapper { border-radius: 12px; }
+    .popup h3 { margin: 0 0 9px; font-size: 1.05rem; }
+    .popup dl { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; margin: 0; font-size: .88rem; }
+    .popup dt { color: var(--muted); }
+    .popup dd { margin: 0; font-weight: 700; text-align: right; }
+    .status { padding: 12px 16px; color: #92400e; background: #fffbeb; font-size: .88rem; }
+    @media (max-width: 850px) {
+      .content { grid-template-columns: 1fr; }
+      #map { min-height: 560px; }
+    }
+    @media (max-width: 480px) {
+      .brand-logo { width: 64px; height: 64px; border-radius: 11px; }
+      .qr-card { justify-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="header-row">
+        <div>
+          <p class="eyebrow">Entre Ríos · Argentina</p>
+          <h1>Consumo Eléctrico Industrial y Comercial Per Cápita por Departamento</h1>
+          <p class="subtitle">Consumo anual industrial y comercial expresado en kWh por habitante · Censo 2022</p>
+          <p class="report-date">Fecha de creación del informe: 1 de noviembre de 2026</p>
+        </div>
+        <img class="brand-logo" src="Pasted%20Image.png" alt="Logo de JoBen">
+      </div>
+    </header>
+    <div class="content">
+      <section class="card" aria-label="Mapa de consumo eléctrico por departamento">
+        <div id="map"></div>
+        <div id="status" class="status" hidden></div>
+      </section>
+      <aside class="card">
+        <h2>Referencia</h2>
+        <div class="average">
+          <span>Promedio provincial</span>
+          <strong>2.561 kWh/hab</strong>
+        </div>
+        <ul class="legend" aria-label="Categorías de consumo">
+          <li><i class="swatch" style="background:#1e3a8a"></i>Muy alto · más de 3.100</li>
+          <li><i class="swatch" style="background:#059669"></i>Alto · 2.300–3.100</li>
+          <li><i class="swatch" style="background:#d97706"></i>Medio · 1.800–2.299</li>
+          <li><i class="swatch" style="background:#fef08a"></i>Bajo · menos de 1.800</li>
+        </ul>
+        <p class="note">Hacé clic en un departamento para consultar el detalle. Las fronteras se obtienen del mapa GeoJSON de departamentos argentinos.</p>
+        <div class="qr-card">
+          <div id="qr-code" role="img" aria-label="Código QR para visitar josebentancourt.ar"></div>
+          <p class="qr-copy"><strong>Conocé más</strong>Escaneá el código para visitar josebentancourt.ar</p>
+        </div>
+      </aside>
+    </div>
+    <footer>
+      Fuente de datos: dataset provisto para esta visualización. Límites geográficos:
+      <a href="https://github.com/mgaitan/departamentos_argentina" target="_blank" rel="noopener">departamentos_argentina</a>.
+      · <a href="https://josebentancourt.ar" target="_blank" rel="noopener">josebentancourt.ar</a>
+    </footer>
+  </main>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const records = [
+      ["Gualeguaychú",-33.01,-58.51,126765,440000,3471,"Muy Alto"],
+      ["Uruguay",-32.48,-58.23,116430,375000,3221,"Muy Alto"],
+      ["Colón",-32.17,-58.23,75091,235000,3130,"Muy Alto"],
+      ["San Salvador",-31.62,-58.50,20816,65000,3123,"Muy Alto"],
+      ["Federación",-30.98,-57.92,79449,220000,2769,"Alto"],
+      ["Paraná",-31.73,-60.00,391962,1050000,2679,"Alto"],
+      ["Islas del Ibicuy",-33.55,-58.85,14075,35000,2487,"Alto"],
+      ["Concordia",-31.39,-58.02,199634,465000,2329,"Alto"],
+      ["Victoria",-32.62,-60.15,40777,92000,2256,"Medio"],
+      ["Gualeguay",-33.15,-59.31,57865,130000,2247,"Medio"],
+      ["Nogoyá",-32.39,-59.78,42371,95000,2242,"Medio"],
+      ["Diamante",-32.07,-60.32,54121,115000,2125,"Medio"],
+      ["Villaguay",-31.86,-59.02,55192,108000,1957,"Medio"],
+      ["Tala",-32.18,-59.13,30840,52000,1686,"Bajo"],
+      ["Federal",-30.95,-58.78,29569,46000,1556,"Bajo"],
+      ["Feliciano",-30.38,-58.75,16597,25000,1506,"Bajo"],
+      ["La Paz",-30.74,-59.64,74872,105000,1402,"Bajo"]
+    ].map(([departamento, lat, lon, poblacion, consumo, kwh, categoria]) =>
+      ({ departamento, lat, lon, poblacion, consumo, kwh, categoria }));
+    const colors = { "Muy Alto": "#1e3a8a", Alto: "#059669", Medio: "#d97706", Bajo: "#fef08a" };
+    const normalize = value => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const byName = new Map(records.map(row => [normalize(row.departamento), row]));
+    const format = new Intl.NumberFormat("es-AR");
+    const map = L.map("map", { scrollWheelZoom: false }).setView([-31.75, -59.4], 7);
+    new QRCode(document.getElementById("qr-code"), {
+      text: "https://josebentancourt.ar", width: 172, height: 172,
+      colorDark: "#172033", colorLight: "#ffffff", correctLevel: QRCode.CorrectLevel.M
+    });
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 12, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+    const popup = row => `<div class="popup"><h3>${row.departamento}</h3><dl>
+      <dt>Consumo per cápita</dt><dd>${format.format(row.kwh)} kWh/hab</dd>
+      <dt>Consumo total</dt><dd>${format.format(row.consumo)} MWh</dd>
+      <dt>Población (Censo 2022)</dt><dd>${format.format(row.poblacion)}</dd>
+    </dl></div>`;
+    const style = feature => {
+      const row = byName.get(normalize(feature.properties.departamento || ""));
+      return { color: "#fff", weight: 1.3, fillColor: row ? colors[row.categoria] : "#cbd5e1", fillOpacity: .78 };
+    };
+    const status = document.getElementById("status");
+    const geojsonUrl = "https://raw.githubusercontent.com/mgaitan/departamentos_argentina/master/departamentos-entre_rios.json";
+    fetch(geojsonUrl).then(response => {
+      if (!response.ok) throw new Error("No se pudo cargar el GeoJSON");
+      return response.json();
+    }).then(data => {
+      const layer = L.geoJSON(data, {
+        style,
+        onEachFeature: (feature, layer) => {
+          const row = byName.get(normalize(feature.properties.departamento || ""));
+          if (!row) return;
+          layer.bindPopup(popup(row));
+          layer.bindTooltip(row.departamento, { sticky: true });
+          layer.on({ mouseover: event => event.target.setStyle({ weight: 2.5, fillOpacity: .92 }),
+            mouseout: event => event.target.setStyle(style(feature)) });
+        }
+      }).addTo(map);
+      map.fitBounds(layer.getBounds(), { padding: [12, 12] });
+    }).catch(error => {
+      status.textContent = "No se pudieron cargar los límites departamentales. Se muestran los puntos de referencia.";
+      status.hidden = false;
+      records.forEach(row => L.circleMarker([row.lat, row.lon], {
+        radius: 8, color: "#fff", weight: 1, fillColor: colors[row.categoria], fillOpacity: .9
+      }).bindPopup(popup(row)).bindTooltip(row.departamento).addTo(map));
+    });
+  </script>
+</body>
+</html>
