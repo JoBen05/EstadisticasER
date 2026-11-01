@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" role="img" aria-labelledby="title">
+  <title>Informe de análisis demográfico de Entre Ríos</title>
+  <rect width="800" height="290" fill="#fff7ed"/>
+  <rect x="64" y="34" width="184" height="220" rx="12" fill="#fff" stroke="#f59e0b" stroke-width="5"/>
+  <path d="M92 78h128M92 103h96M92 128h112" stroke="#94a3b8" stroke-width="8" stroke-linecap="round"/>
+  <path d="M93 204l32-39 28 20 34-55 38 38" fill="none" stroke="#d97706" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="130" cy="165" r="7" fill="#1e3a8a"/><circle cx="153" cy="185" r="7" fill="#107c41"/><circle cx="187" cy="130" r="7" fill="#d97706"/>
+  <path d="M360 225c15-46 48-74 98-74s83 28 98 74" fill="none" stroke="#1e3a8a" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="458" cy="103" r="35" fill="#1e3a8a"/>
+  <path d="M653 55v170M607 225h92" stroke="#107c41" stroke-width="10" stroke-linecap="round"/>
+  <path d="M625 192l28-38 27 21" fill="none" stroke="#059669" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="300" y="54" fill="#172033" font-family="Arial,sans-serif" font-size="24" font-weight="700">ANÁLISIS DEMOGRÁFICO</text>
+  <text x="300" y="264" fill="#64748b" font-family="Arial,sans-serif" font-size="17">Censo 2022 · población y territorio</text>
+</svg>
