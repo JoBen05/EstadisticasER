@@ -172,7 +172,7 @@
       status.hidden = false;
       records.forEach(row => L.circleMarker([row.lat, row.lon], {
         radius: 8, color: "#fff", weight: 1, fillColor: colors[row.categoria], fillOpacity: .9
-      }).bindPopup(popup(row)).bindTooltip(row.departamento).addTo(map));
+      }).bindPopup(popup(row)).bindTooltip(tooltip(row), { sticky: true, direction: "top", opacity: .97 }).addTo(map));
     });
   </script>
 </body>
