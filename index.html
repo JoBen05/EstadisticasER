@@ -12,6 +12,8 @@
     body { margin: 0; color: var(--ink); background: var(--bg); font: 16px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
     .wrap { max-width: 1280px; margin: 0 auto; padding: 28px 20px 20px; }
     header { margin-bottom: 18px; }
+    .header-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 20px; }
+    .brand-logo { width: 82px; height: 82px; flex: 0 0 auto; border-radius: 14px; object-fit: cover; box-shadow: 0 6px 18px rgb(15 23 42 / 16%); }
     .eyebrow { margin: 0 0 6px; color: #2563eb; font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
     h1 { margin: 0; max-width: 900px; font-size: clamp(1.7rem, 3.2vw, 2.7rem); line-height: 1.08; }
     .subtitle { margin: 10px 0 0; color: var(--muted); }
@@ -27,6 +29,10 @@
     .legend li { display: flex; align-items: center; gap: 10px; color: #334155; font-size: .9rem; }
     .swatch { width: 20px; height: 20px; border: 1px solid rgb(15 23 42 / 12%); border-radius: 5px; }
     .note { margin: 24px 0 0; padding-top: 17px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
+    .qr-card { display: flex; align-items: center; gap: 14px; margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+    #qr-code { width: 86px; height: 86px; flex: 0 0 auto; border-radius: 6px; }
+    .qr-copy { color: var(--muted); font-size: .82rem; }
+    .qr-copy strong { display: block; margin-bottom: 3px; color: var(--ink); font-size: .9rem; }
     footer { padding: 18px 2px 0; color: var(--muted); font-size: .84rem; }
     footer a { color: #2563eb; font-weight: 700; text-decoration: none; }
     footer a:hover { text-decoration: underline; }
@@ -40,14 +46,23 @@
       .content { grid-template-columns: 1fr; }
       #map { min-height: 560px; }
     }
+    @media (max-width: 480px) {
+      .brand-logo { width: 64px; height: 64px; border-radius: 11px; }
+      .qr-card { align-items: flex-start; }
+    }
   </style>
 </head>
 <body>
   <main class="wrap">
     <header>
-      <p class="eyebrow">Entre Ríos · Argentina</p>
-      <h1>Consumo Eléctrico Industrial y Comercial Per Cápita por Departamento</h1>
-      <p class="subtitle">Consumo anual industrial y comercial expresado en kWh por habitante · Censo 2022</p>
+      <div class="header-row">
+        <div>
+          <p class="eyebrow">Entre Ríos · Argentina</p>
+          <h1>Consumo Eléctrico Industrial y Comercial Per Cápita por Departamento</h1>
+          <p class="subtitle">Consumo anual industrial y comercial expresado en kWh por habitante · Censo 2022</p>
+        </div>
+        <img class="brand-logo" src="logo-joben.png" alt="Logo de JoBen">
+      </div>
     </header>
     <div class="content">
       <section class="card" aria-label="Mapa de consumo eléctrico por departamento">
@@ -67,6 +82,10 @@
           <li><i class="swatch" style="background:#fef08a"></i>Bajo · menos de 1.800</li>
         </ul>
         <p class="note">Hacé clic en un departamento para consultar el detalle. Las fronteras se obtienen del mapa GeoJSON de departamentos argentinos.</p>
+        <div class="qr-card">
+          <canvas id="qr-code" width="172" height="172" aria-label="Código QR para visitar josebentancourt.ar"></canvas>
+          <p class="qr-copy"><strong>Conocé más</strong>Escaneá el código para visitar josebentancourt.ar</p>
+        </div>
       </aside>
     </div>
     <footer>
@@ -77,6 +96,7 @@
   </main>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
   <script>
     const records = [
       ["Gualeguaychú",-33.01,-58.51,126765,440000,3471,"Muy Alto"],
@@ -103,6 +123,12 @@
     const byName = new Map(records.map(row => [normalize(row.departamento), row]));
     const format = new Intl.NumberFormat("es-AR");
     const map = L.map("map", { scrollWheelZoom: false }).setView([-31.75, -59.4], 7);
+    QRCode.toCanvas(document.getElementById("qr-code"), "https://josebentancourt.ar", {
+      width: 172, margin: 1, color: { dark: "#172033", light: "#ffffff" }
+    }).catch(error => {
+      document.getElementById("qr-code").replaceWith("QR no disponible");
+      console.error("No se pudo generar el código QR.", error);
+    });
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 12, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
