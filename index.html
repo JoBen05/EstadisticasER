@@ -83,7 +83,7 @@
         </ul>
         <p class="note">Hacé clic en un departamento para consultar el detalle. Las fronteras se obtienen del mapa GeoJSON de departamentos argentinos.</p>
         <div class="qr-card">
-          <canvas id="qr-code" width="172" height="172" aria-label="Código QR para visitar josebentancourt.ar"></canvas>
+          <img id="qr-code" src="https://api.qrserver.com/v1/create-qr-code/?size=172x172&amp;data=https%3A%2F%2Fjosebentancourt.ar" alt="Código QR para visitar josebentancourt.ar">
           <p class="qr-copy"><strong>Conocé más</strong>Escaneá el código para visitar josebentancourt.ar</p>
         </div>
       </aside>
@@ -96,7 +96,6 @@
   </main>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-  <script src="https://unpkg.com/qrcode@1.5.4/build/qrcode.min.js"></script>
   <script>
     const records = [
       ["Gualeguaychú",-33.01,-58.51,126765,440000,3471,"Muy Alto"],
@@ -123,12 +122,6 @@
     const byName = new Map(records.map(row => [normalize(row.departamento), row]));
     const format = new Intl.NumberFormat("es-AR");
     const map = L.map("map", { scrollWheelZoom: false }).setView([-31.75, -59.4], 7);
-    QRCode.toCanvas(document.getElementById("qr-code"), "https://josebentancourt.ar", {
-      width: 172, margin: 1, color: { dark: "#172033", light: "#ffffff" }
-    }).catch(error => {
-      document.getElementById("qr-code").replaceWith("QR no disponible");
-      console.error("No se pudo generar el código QR.", error);
-    });
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 12, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
