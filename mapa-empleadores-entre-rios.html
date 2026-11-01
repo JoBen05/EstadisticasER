@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Empleadores registrados por departamento | Entre Ríos</title>
+  <title>Empleo privado formal por departamento | Entre Ríos</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     :root { --ink:#172033; --muted:#64748b; --line:#e2e8f0; --bg:#f8fafc; }
@@ -51,27 +51,27 @@
     <header>
       <div>
         <p class="eyebrow">Entre Ríos · Argentina</p>
-        <h1>¿Dónde están las empresas que mueven Entre Ríos?</h1>
-        <p class="subtitle">Empleadores registrados activos y empleo privado formal por departamento</p>
+        <h1>¿Dónde se concentra el empleo privado formal de Entre Ríos?</h1>
+        <p class="subtitle">Densidad de empleo asalariado privado registrado por departamento</p>
         <p class="date">Fecha de creación del informe: 1 de noviembre de 2026</p>
       </div>
       <img class="brand-logo" src="Pasted%20Image.png" alt="Logo de JoBen">
     </header>
     <div class="content">
-      <section class="card" aria-label="Mapa de empleadores registrados por departamento">
+      <section class="card" aria-label="Mapa de empleo privado formal por departamento">
         <div id="map"></div>
         <div id="status" class="status" hidden></div>
       </section>
       <aside class="card">
-        <h2>Empleadores activos estimados</h2>
-        <div class="average"><span>Total provincial</span><strong>16.330</strong></div>
-        <ul class="legend" aria-label="Categorías de empleadores">
-          <li><i class="swatch" style="background:#1e3a8a"></i>Muy alto · más de 3.000</li>
-          <li><i class="swatch" style="background:#059669"></i>Alto · 1.000–2.999</li>
-          <li><i class="swatch" style="background:#d97706"></i>Medio · 300–999</li>
-          <li><i class="swatch" style="background:#fef08a"></i>Bajo · menos de 300</li>
+        <h2>Densidad de empleo privado</h2>
+        <div class="average"><span>Total provincial</span><strong>100,9 / 1.000 hab.</strong></div>
+        <ul class="legend" aria-label="Categorías de densidad de empleo">
+          <li><i class="swatch" style="background:#1e3a8a"></i>Muy alto · 110 o más</li>
+          <li><i class="swatch" style="background:#059669"></i>Alto · 80–109,9</li>
+          <li><i class="swatch" style="background:#d97706"></i>Medio · 60–79,9</li>
+          <li><i class="swatch" style="background:#fef08a"></i>Bajo · menos de 60</li>
         </ul>
-        <p class="note">Estimación territorial basada en el cruce de registros SIPA, OEDE, SRT y fuentes económicas oficiales. Pasá el cursor o tocá un departamento para ver el detalle.</p>
+        <p class="note">Fuente: SIPA, OEDE y DGEyC Entre Ríos. La comparación usa empleo localizado por departamento para evitar sesgos del domicilio fiscal. Pasá el cursor o tocá un departamento para ver el detalle.</p>
         <div class="qr"><div id="qr-code" role="img" aria-label="Código QR para visitar josebentancourt.ar"></div></div>
       </aside>
     </div>
@@ -81,37 +81,37 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <script>
     const records = [
-      ["Paraná",-31.73,-60.00,5308,46800,119.4,"Comercio, servicios urbanos, metalmecánica, química"],
-      ["Concordia",-31.39,-58.02,2083,18200,91.2,"Empaque cítrico, aserraderos, empaque de arándanos"],
-      ["Gualeguaychú",-33.01,-58.51,1792,15900,125.4,"Parque Industrial, química, plásticos, autopartes, agro"],
-      ["Uruguay",-32.48,-58.23,1644,14500,124.5,"Frigoríficos avícolas, molinos, carrozados metalmecánicos"],
-      ["Colón",-32.17,-58.23,1042,9200,122.5,"Avicultura de exportación, turismo, molinos arroceros"],
-      ["Federación",-30.98,-57.92,981,8600,108.2,"Aserraderos tecnificados, cítricos, empaque"],
-      ["Gualeguay",-33.15,-59.31,578,5100,88.1,"Frigoríficos vacunos y avícolas, acopio granario"],
-      ["La Paz",-30.74,-59.64,465,4100,54.8,"Ganadería, comercio ribereño, pesca"],
-      ["Villaguay",-31.86,-59.02,442,3900,70.7,"Logística, molienda arrocera, servicios al campo"],
-      ["Diamante",-32.07,-60.32,431,3800,70.2,"Puerto granario, laboratorios veterinarios, lechería"],
-      ["Nogoyá",-32.39,-59.78,385,3400,80.2,"Industria láctea, queserías, acopio cerealero"],
-      ["Victoria",-32.62,-60.15,374,3300,80.9,"Puerto cerealero, agroservicios, turismo"],
-      ["San Salvador",-31.62,-58.50,261,2300,110.5,"Molinos arroceros y talleres metalmecánicos de riego"],
-      ["Tala",-32.18,-59.13,204,1800,58.4,"Avicultura parrillera, tambos"],
-      ["Federal",-30.95,-58.78,147,1300,44.0,"Ganadería de monte, comercio local"],
-      ["Islas del Ibicuy",-33.55,-58.85,125,1100,78.2,"Arenas silíceas, silvicultura"],
-      ["Feliciano",-30.38,-58.75,68,600,36.2,"Ganadería extensiva, comercio comunitario"]
-    ].map(([departamento,lat,lon,empleadores,empleo,porMil,perfil]) =>
-      ({ departamento,lat,lon,empleadores,empleo,porMil,perfil }));
+      ["Gualeguaychú",-33.01,-58.51,126765,15900,125.4,10200,1.56],
+      ["Uruguay",-32.48,-58.23,116430,14500,124.5,11500,1.26],
+      ["Colón",-32.17,-58.23,75091,9200,122.5,5600,1.64],
+      ["Paraná",-31.73,-60.00,391962,46800,119.4,45200,1.04],
+      ["San Salvador",-31.62,-58.50,20816,2300,110.5,1600,1.44],
+      ["Federación",-30.98,-57.92,79449,8600,108.2,5800,1.48],
+      ["Concordia",-31.39,-58.02,199634,18200,91.2,15800,1.15],
+      ["Gualeguay",-33.15,-59.31,57865,5100,88.1,4500,1.13],
+      ["Victoria",-32.62,-60.15,40777,3300,80.9,3300,1.00],
+      ["Nogoyá",-32.39,-59.78,42371,3400,80.2,3400,1.00],
+      ["Islas del Ibicuy",-33.55,-58.85,14075,1100,78.2,1300,0.85],
+      ["Villaguay",-31.86,-59.02,55192,3900,70.7,4900,0.80],
+      ["Diamante",-32.07,-60.32,54121,3800,70.2,3900,0.97],
+      ["Tala",-32.18,-59.13,30840,1800,58.4,2600,0.69],
+      ["La Paz",-30.74,-59.64,74872,4100,54.8,6200,0.66],
+      ["Federal",-30.95,-58.78,29569,1300,44.0,2800,0.46],
+      ["Feliciano",-30.38,-58.75,16597,600,36.2,1800,0.33]
+    ].map(([departamento,lat,lon,poblacion,empleoPrivado,porMil,empleoPublico,ratio]) =>
+      ({ departamento,lat,lon,poblacion,empleoPrivado,porMil,empleoPublico,ratio }));
     const colors = { "Muy Alto":"#1e3a8a", Alto:"#059669", Medio:"#d97706", Bajo:"#fef08a" };
     const normalize = value => value.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
     const byName = new Map(records.map(row => [normalize(row.departamento),row]));
-    const category = value => value > 3000 ? "Muy Alto" : value >= 1000 ? "Alto" : value >= 300 ? "Medio" : "Bajo";
+    const category = value => value >= 110 ? "Muy Alto" : value >= 80 ? "Alto" : value >= 60 ? "Medio" : "Bajo";
     const number = value => new Intl.NumberFormat("es-AR").format(value);
-    const tooltip = row => `<div class="map-tooltip"><h3>${row.departamento}</h3><dl><dt>Empleadores activos</dt><dd>${number(row.empleadores)}</dd><dt>Empleo privado formal</dt><dd>${number(row.empleo)} puestos</dd><dt>Empleo por 1.000 hab.</dt><dd>${row.porMil.toFixed(1).replace(".",",")}</dd><dt>Perfil predominante</dt><dd>${row.perfil}</dd></dl></div>`;
+    const tooltip = row => `<div class="map-tooltip"><h3>${row.departamento}</h3><dl><dt>Población</dt><dd>${number(row.poblacion)}</dd><dt>Empleo privado formal</dt><dd>${number(row.empleoPrivado)} puestos</dd><dt>Privado por 1.000 hab.</dt><dd>${row.porMil.toFixed(1).replace(".",",")}</dd><dt>Empleo público total</dt><dd>${number(row.empleoPublico)} puestos</dd><dt>Ratio privado / público</dt><dd>${row.ratio.toFixed(2).replace(".",",")}</dd></dl></div>`;
     const map = L.map("map", { scrollWheelZoom:false }).setView([-31.75,-59.2], 7.6);
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution:"© OpenStreetMap contributors" }).addTo(map);
-    const style = feature => { const row = byName.get(normalize(feature.properties.departamento || "")); return { color:"#fff", weight:1.4, fillColor:row ? colors[category(row.empleadores)] : "#cbd5e1", fillOpacity:.82 }; };
+    const style = feature => { const row = byName.get(normalize(feature.properties.departamento || "")); return { color:"#fff", weight:1.4, fillColor:row ? colors[category(row.porMil)] : "#cbd5e1", fillOpacity:.82 }; };
     const onEach = (feature, layer) => { const row = byName.get(normalize(feature.properties.departamento || "")); if (!row) return; layer.bindTooltip(tooltip(row), { sticky:true, direction:"top", className:"map-tooltip-shell", opacity:.98 }); layer.on({ mouseover:event => { event.target.setStyle({ weight:3, color:"#172033", fillOpacity:.95 }); event.target.openTooltip(); }, mouseout:event => { geojson.resetStyle(event.target); event.target.closeTooltip(); }, click:event => event.target.openTooltip() }); };
     let geojson;
-    fetch("https://raw.githubusercontent.com/mgaitan/departamentos_argentina/master/departamentos-entre_rios.json").then(response => { if (!response.ok) throw new Error("No se pudo cargar el mapa territorial."); return response.json(); }).then(data => { geojson = L.geoJSON(data, { style, onEachFeature:onEach }).addTo(map); map.fitBounds(geojson.getBounds(), { padding:[12,12] }); }).catch(error => { const status=document.getElementById("status"); status.hidden=false; status.textContent=error.message; records.forEach(row => { const marker=L.circleMarker([row.lat,row.lon], { radius:8, color:"#fff", weight:1, fillColor:colors[category(row.empleadores)], fillOpacity:.9 }).addTo(map); marker.bindTooltip(tooltip(row), { direction:"top", opacity:.98 }); marker.on("mouseover",() => marker.openTooltip()); marker.on("mouseout",() => marker.closeTooltip()); marker.on("click",() => marker.openTooltip()); }); });
+    fetch("https://raw.githubusercontent.com/mgaitan/departamentos_argentina/master/departamentos-entre_rios.json").then(response => { if (!response.ok) throw new Error("No se pudo cargar el mapa territorial."); return response.json(); }).then(data => { geojson = L.geoJSON(data, { style, onEachFeature:onEach }).addTo(map); map.fitBounds(geojson.getBounds(), { padding:[12,12] }); }).catch(error => { const status=document.getElementById("status"); status.hidden=false; status.textContent=error.message; records.forEach(row => { const marker=L.circleMarker([row.lat,row.lon], { radius:8, color:"#fff", weight:1, fillColor:colors[category(row.porMil)], fillOpacity:.9 }).addTo(map); marker.bindTooltip(tooltip(row), { direction:"top", opacity:.98 }); marker.on("mouseover",() => marker.openTooltip()); marker.on("mouseout",() => marker.closeTooltip()); marker.on("click",() => marker.openTooltip()); }); });
     new QRCode(document.getElementById("qr-code"), { text:"https://josebentancourt.ar", width:172, height:172, correctLevel:QRCode.CorrectLevel.M });
   </script>
 </body>
