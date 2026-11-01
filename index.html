@@ -25,14 +25,14 @@
     h2 { margin:0; color:var(--navy); font-size:1.2rem; }
     .count { color:var(--muted); font-size:.82rem; }
     .cards { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
-    .card { display:flex; min-height:250px; flex-direction:column; padding:22px; border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 8px 26px rgb(15 23 42 / 6%); }
-    .tag { align-self:flex-start; margin-bottom:20px; padding:5px 9px; border-radius:999px; color:#1d4ed8; background:#eff6ff; font-size:.72rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
+    .card { display:flex; min-height:330px; flex-direction:column; overflow:hidden; border:1px solid var(--line); border-radius:16px; background:#fff; box-shadow:0 8px 26px rgb(15 23 42 / 6%); }
+    .card-image { display:block; width:100%; height:145px; object-fit:cover; background:#eaf1fb; }
+    .card-body { display:flex; flex:1; flex-direction:column; padding:18px 22px 22px; }
+    .tag { align-self:flex-start; margin-bottom:14px; padding:5px 9px; border-radius:999px; color:#1d4ed8; background:#eff6ff; font-size:.72rem; font-weight:800; letter-spacing:.04em; text-transform:uppercase; }
     .card h3 { margin:0; color:var(--navy); font-size:1.15rem; line-height:1.2; }
     .card p { margin:10px 0 18px; color:var(--muted); font-size:.91rem; }
     .card a { margin-top:auto; color:var(--blue); font-size:.9rem; font-weight:800; text-decoration:none; }
     .card a:hover { text-decoration:underline; }
-    .card.placeholder { border-style:dashed; background:transparent; box-shadow:none; }
-    .placeholder .tag { color:#475569; background:#e2e8f0; }
     .about { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:30px; }
     .about-card { padding:22px; border-radius:16px; background:var(--navy); color:#fff; }
     .about-card h2 { color:#fff; }
@@ -66,32 +66,35 @@
     <section aria-labelledby="resources-title">
       <div class="section-heading">
         <h2 id="resources-title">Mapas e informes</h2>
-        <span class="count">2 recursos publicados</span>
+        <span class="count">3 recursos publicados</span>
       </div>
       <div class="cards">
         <article class="card">
-          <span class="tag">Mapa interactivo</span>
-          <h3>Consumo eléctrico industrial y comercial per cápita</h3>
-          <p>Consumo por departamento de Entre Ríos, con datos de población del Censo 2022 y promedio provincial.</p>
-          <a href="mapa-consumo-entre-rios.html">Abrir mapa →</a>
+          <img class="card-image" src="miniatura-consumo.svg" alt="Vista representativa del mapa de consumo eléctrico">
+          <div class="card-body">
+            <span class="tag">Mapa interactivo</span>
+            <h3>Consumo eléctrico industrial y comercial per cápita</h3>
+            <p>Consumo por departamento de Entre Ríos, con datos de población del Censo 2022 y promedio provincial.</p>
+            <a href="mapa-consumo-entre-rios.html">Abrir mapa →</a>
+          </div>
         </article>
         <article class="card">
-          <span class="tag">Mapa interactivo</span>
-          <h3>¿Dónde se concentra la potencia exportadora de Entre Ríos?</h3>
-          <p>Intensidad económica y exportadora por habitante, con categoría y complejo agroindustrial principal.</p>
-          <a href="mapa_intensidad_exportadora_entre_rios.html">Abrir mapa →</a>
+          <img class="card-image" src="miniatura-exportaciones.svg" alt="Vista representativa del mapa de intensidad exportadora">
+          <div class="card-body">
+            <span class="tag">Mapa interactivo</span>
+            <h3>¿Dónde se concentra la potencia exportadora de Entre Ríos?</h3>
+            <p>Intensidad económica y exportadora por habitante, con categoría y complejo agroindustrial principal.</p>
+            <a href="mapa_intensidad_exportadora_entre_rios.html">Abrir mapa →</a>
+          </div>
         </article>
-        <article class="card placeholder">
-          <span class="tag">Próximamente</span>
-          <h3>Nuevo informe</h3>
-          <p>Este espacio queda preparado para sumar el próximo mapa o informe estadístico.</p>
-          <span class="count">En preparación</span>
-        </article>
-        <article class="card placeholder">
-          <span class="tag">Próximamente</span>
-          <h3>Nuevo mapa</h3>
-          <p>Una nueva visualización territorial podrá incorporarse aquí sin cambiar la portada.</p>
-          <span class="count">En preparación</span>
+        <article class="card">
+          <img class="card-image" src="presentacion-energia-limpia-01.jpeg" alt="Primera lámina del análisis energético">
+          <div class="card-body">
+            <span class="tag">Informe</span>
+            <h3>Análisis del consumo energético de Entre Ríos</h3>
+            <p>Presentación con los principales hallazgos del mapa de consumo eléctrico industrial y comercial.</p>
+            <a href="analisis-energia.html">Leer informe →</a>
+          </div>
         </article>
       </div>
     </section>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" role="img" aria-labelledby="title">
+  <title>Mapa abstracto de intensidad exportadora por departamento</title>
+  <rect width="800" height="290" fill="#eef7f1"/>
+  <path d="M288 27l85 20 57 42 100 8 73 64-35 78-124 22-112-28-76-71 11-81z" fill="#d1fae5" stroke="#107c41" stroke-width="6"/>
+  <path d="M319 43l33 205M393 66l-25 164M475 88l-42 131M560 99l-76 111M260 105l277 57M239 157l301 26M286 207l207 8" fill="none" stroke="#fff" stroke-width="4" opacity=".9"/>
+  <circle cx="339" cy="93" r="18" fill="#1e3a8a"/><circle cx="426" cy="133" r="18" fill="#107c41"/><circle cx="499" cy="176" r="18" fill="#d97706"/><circle cx="366" cy="205" r="18" fill="#fde047" stroke="#d97706" stroke-width="2"/>
+  <text x="32" y="52" fill="#172033" font-family="Arial,sans-serif" font-size="24" font-weight="700">POTENCIA EXPORTADORA</text>
+  <text x="32" y="82" fill="#64748b" font-family="Arial,sans-serif" font-size="17">USD por habitante · Entre Ríos</text>
+</svg>
