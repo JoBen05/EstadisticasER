@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La nube que transforma | UTN FRCU | JoBen</title>
+  <style>
+    :root{--ink:#172033;--muted:#64748b;--line:#e2e8f0;--bg:#f8fafc;--blue:#1e3a8a}
+    *{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--bg);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+    .wrap{max-width:1180px;margin:auto;padding:28px 20px 34px}.back{display:inline-block;margin-bottom:18px;color:#2563eb;font-size:.88rem;font-weight:750;text-decoration:none}.back:hover,footer a:hover{text-decoration:underline}
+    header{display:flex;align-items:flex-start;justify-content:space-between;gap:22px;margin-bottom:20px}.eyebrow{margin:0 0 7px;color:#2563eb;font-size:.78rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+    h1{max-width:850px;margin:0;font-size:clamp(2rem,4.5vw,3.8rem);line-height:1.02;letter-spacing:-.035em}.subtitle{max-width:780px;margin:14px 0 0;color:var(--muted);font-size:1.08rem}.date{margin:8px 0 0;color:#475569;font-size:.86rem;font-weight:650}.logo{width:82px;height:82px;flex:none;border-radius:14px;object-fit:cover;box-shadow:0 6px 18px rgb(15 23 42 / 16%)}
+    .visit-counter{margin:0 0 18px;color:var(--muted);font-size:.82rem}.visit-counter strong{color:#2563eb}
+    .intro{display:grid;grid-template-columns:1fr 310px;gap:18px;margin-bottom:18px}.panel{padding:22px;border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:0 8px 26px rgb(15 23 42 / 7%)}.panel h2{margin:0 0 9px;font-size:1.2rem}.panel p{margin:0;color:#475569}.facts{display:grid;gap:11px}.fact{padding:12px 14px;border-radius:11px;background:#eff6ff}.fact strong{display:block;color:var(--blue);font-size:.85rem}.fact span{display:block;margin-top:2px;color:#475569;font-size:.82rem}
+    .viewer{overflow:hidden;border:1px solid var(--line);border-radius:16px;background:#334155;box-shadow:0 8px 26px rgb(15 23 42 / 7%)}.viewer-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 16px;color:#fff;font-size:.85rem}.download{padding:8px 12px;border-radius:8px;color:#fff;background:#2563eb;font-weight:750;text-decoration:none}.download:hover{background:#1d4ed8}.pdf{display:block;width:100%;height:min(78vh,820px);border:0;background:#fff}
+    .note{margin-top:18px;padding:17px 19px;border-left:4px solid var(--blue);color:var(--muted);font-size:.85rem;background:#fff;border-radius:0 12px 12px 0}.note strong{color:var(--ink)}footer{margin-top:24px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:.82rem}footer a{color:#2563eb;font-weight:700;text-decoration:none}
+    @media(max-width:760px){.intro{grid-template-columns:1fr}header{flex-direction:column}.logo{width:64px;height:64px}.pdf{height:68vh}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="index.html">← Volver a Estadísticas Entre Ríos</a>
+    <header><div><p class="eyebrow">Informe invitado · UTN FRCU</p><h1>La nube que transforma.</h1><p class="subtitle">Tecnología, innovación y competitividad: una presentación del Centro de Estudios de la Universidad Tecnológica Nacional, Facultad Regional Concepción del Uruguay.</p><p class="date">Documento original: septiembre de 2026 · GIDIC · Leandro Lepratte</p></div><img class="logo" src="Pasted%20Image.png" alt="Logo de JoBen"></header>
+    <div class="visit-counter">Visitas a este informe: <strong id="visit-count">cargando…</strong></div>
+    <section class="intro"><article class="panel"><h2>Una conversación necesaria sobre la transformación digital</h2><p>La computación en la nube dejó de ser únicamente una herramienta tecnológica: es una infraestructura para innovar, competir y ampliar las capacidades de organizaciones, empresas y territorios. Este informe del GIDIC aporta una mirada académica para comprender ese cambio.</p></article><aside class="panel facts"><div class="fact"><strong>Institución</strong><span>UTN · Facultad Regional Concepción del Uruguay</span></div><div class="fact"><strong>Grupo de investigación</strong><span>GIDIC · Desarrollo, Innovación y Competitividad</span></div><div class="fact"><strong>Formato</strong><span>Presentación original de 22 páginas</span></div></aside></section>
+    <section class="viewer" aria-label="Visor del informe de UTN FRCU"><div class="viewer-bar"><span>Leer la presentación completa</span><a class="download" href="informe-utn-frcu-la-nube.pdf" download>Descargar PDF</a></div><iframe class="pdf" src="informe-utn-frcu-la-nube.pdf" title="Informe UTN FRCU sobre la nube"></iframe></section>
+    <div class="note"><strong>Fuente:</strong> presentación provista del Centro de Estudios UTN FRCU / GIDIC. Esta página funciona como ficha editorial y acceso al documento original; el contenido académico pertenece a sus autores.</div>
+    <footer>JoBen | Human-Led Industrial AI · <a href="https://josebentancourt.ar" target="_blank" rel="noopener">josebentancourt.ar</a></footer>
+  </main>
+  <script data-goatcounter="https://joben.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  <script>fetch("https://joben.goatcounter.com/counter/informe-utn-frcu-la-nube.html.json").then(response=>{if(!response.ok)throw new Error("No disponible");return response.json()}).then(data=>{document.getElementById("visit-count").textContent=data.count||"0"}).catch(()=>{document.getElementById("visit-count").textContent="No disponible"});</script>
+</body>
+</html>
