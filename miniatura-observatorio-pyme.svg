@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" role="img" aria-labelledby="title">
+  <title>Informe de coyuntura PyME industrial</title>
+  <rect width="800" height="290" fill="#fff1f2"/>
+  <path d="M92 205V95h100v110M230 205V62h100v143M368 205v-76h100v76M506 205v-125h100v125" fill="#fecdd3" stroke="#b91c1c" stroke-width="5"/>
+  <path d="M94 82L230 98 368 134 506 165 690 208" fill="none" stroke="#1e3a8a" stroke-width="9" stroke-linecap="round"/>
+  <circle cx="94" cy="82" r="11" fill="#1e3a8a"/><circle cx="690" cy="208" r="14" fill="#b91c1c"/>
+  <text x="32" y="40" fill="#172033" font-family="Arial,sans-serif" font-size="24" font-weight="700">PYME INDUSTRIAL EN ALERTA</text>
+  <text x="32" y="260" fill="#7f1d1d" font-family="Arial,sans-serif" font-size="17">Producción, empleo y costos · III trimestre 2026</text>
+</svg>
